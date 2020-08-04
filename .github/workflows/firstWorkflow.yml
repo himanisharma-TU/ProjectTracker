@@ -14,7 +14,7 @@ jobs:
       - name: Setup Nuget.exe
         uses: warrenbuckley/Setup-Nuget@v1
       - name: Restore packages
-        uses: nuget Restore /ProjectTracker/ProjectTrackerApp.sln
+        uses: nuget Restore ProjectTrackerApp.sln
       - name: Setup MSBuild.exe
         uses: warrenbuckley/Setup-MSBuild@v1
       - name: Build with MSBuild
