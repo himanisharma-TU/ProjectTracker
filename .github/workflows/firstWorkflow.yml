@@ -29,7 +29,7 @@ jobs:
       uses: NuGet/setup-nuget@v1.0.2
 
     - name: Restore NuGet Package
-      uses: nuget restore ./
+      run: nuget restore ProjectTrackerApp.sln
 
     - name: Build the solution file
-      run: msbuild ./
+      run: msbuild ProjectTrackerApp.sln
