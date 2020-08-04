@@ -1,0 +1,100 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ProjectTrackerApp.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Project Tracker</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" runat="server" href="~/">Project Tracker</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Task</a></li>
+                        <li><a runat="server" href="~/Admin/Project">Project</a></li>
+                        <li><a runat="server" href="~/Admin/Status">Status</a></li>
+                        <%--<li><a runat="server" href="~/Admin/User">User</a></li>--%>
+                    </ul>
+                    <p class="nav navbar-text navbar-right">Hello, <asp:LoginName runat="server" />!</p>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - TaskUS</p>
+            </footer>
+        </div>
+        <asp:SqlDataSource ID="ResourceSqlDataSource" runat="server" ConnectionString='<%$ ConnectionStrings:ProjectTrackDBConnStr %>' 
+            DeleteCommand="DELETE FROM [AppUser] WHERE [EmployeeNo] = @EmployeeNo" 
+            InsertCommand="INSERT INTO [AppUser] ([EmployeeNo], [FirstName], [LastName], [BusinessTitle], [Active], [_CreatedBy], [_CreatedDate], [EmailId]) VALUES (@EmployeeNo, @FirstName, @LastName, @BusinessTitle, @Active, @CreatedBy, GETDATE(), @EmailId)" 
+            SelectCommand="SELECT [EmployeeNo],[FirstName],[LastName],[BusinessTitle],[Active],[_CreatedBy],[_CreatedDate],[_ModifiedBy],[_ModifiedDate],[EmailId] FROM [AppUser]" 
+            UpdateCommand="UPDATE [AppUser] SET [FirstName] = @FirstName, [LastName] = @LastName, [BusinessTitle] = @BusinessTitle, [Active] = @Active, [_ModifiedBy] = @ModifiedBy, [_ModifiedDate] = GETDATE(), [EmailId] = @EmailId WHERE [EmployeeNo] = @EmployeeNo">
+            <DeleteParameters>
+                <asp:Parameter Name="EmployeeNo" Type="Int32"></asp:Parameter>
+            </DeleteParameters>
+            <InsertParameters>
+                <asp:Parameter Name="EmployeeNo" Type="Int32"></asp:Parameter>
+                <asp:Parameter Name="FirstName" Type="String"></asp:Parameter>
+                <asp:Parameter Name="LastName" Type="String"></asp:Parameter>
+                <asp:Parameter Name="BusinessTitle" Type="String"></asp:Parameter>
+                <asp:Parameter Name="Active" Type="Boolean"></asp:Parameter>
+                <asp:Parameter Name="CreatedBy" Type="String"></asp:Parameter>
+                <asp:Parameter DbType="DateTime2" Name="CreatedDate"></asp:Parameter>
+                <asp:Parameter Name="EmailId" Type="String"></asp:Parameter>
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="FirstName" Type="String"></asp:Parameter>
+                <asp:Parameter Name="LastName" Type="String"></asp:Parameter>
+                <asp:Parameter Name="BusinessTitle" Type="String"></asp:Parameter>
+                <asp:Parameter Name="Active" Type="Boolean"></asp:Parameter>
+                <asp:Parameter Name="column1" Type="String"></asp:Parameter>
+                <asp:Parameter DbType="DateTime2" Name="column2"></asp:Parameter>
+                <asp:Parameter Name="ModifiedBy" Type="String"></asp:Parameter>
+                <asp:Parameter DbType="DateTime2" Name="ModifiedDate"></asp:Parameter>
+                <asp:Parameter Name="EmailId" Type="String"></asp:Parameter>
+                <asp:Parameter Name="EmployeeNo" Type="Int32"></asp:Parameter>
+            </UpdateParameters>
+            <SelectParameters>
+                <asp:Parameter Name="EmployeeNo" Type="Int32"></asp:Parameter>
+            </SelectParameters>
+        </asp:SqlDataSource>
+    </form>
+</body>
+</html>
