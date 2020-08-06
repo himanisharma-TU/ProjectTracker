@@ -11,7 +11,7 @@
                         <asp:Button ID="EditButton" runat="server" CommandName="Edit" Text="Edit" />
                     </td>
                     <td>
-                        <asp:Label ID="EmployeeNoLabel" runat="server" Text='<%# Eval("EmployeeNo") %>' />
+                        <asp:Label ID="EmployeeNoLabel" runat="server" Text='<%# Eval("EmployeeId") %>' />
                     </td>
                     <td>
                         <asp:Label ID="FirstNameLabel" runat="server" Text='<%# Eval("FirstName") %>' />
